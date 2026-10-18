@@ -13,7 +13,7 @@ export const blogsRepository = {
     create(newBlog: Omit<Blog, 'id'>): Blog {
         const lastBlog = db.blogs[db.blogs.length - 1];
         const created: Blog = {
-            id: lastBlog ? lastBlog.id - 1 : 1,
+            id: lastBlog ? lastBlog.id + 1 : 1,
             ...newBlog,
         };
 
