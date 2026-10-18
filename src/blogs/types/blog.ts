@@ -1,6 +1,6 @@
 // Модель блога.
 export type Blog = {
-    id: number,
+    id: string,
     name: string,
     description: string,
     websiteUrl: string,

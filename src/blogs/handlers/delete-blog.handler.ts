@@ -7,7 +7,7 @@ export const deleteBlogHandler = (
     req: Request<{ id: string }>,
     res: Response
 ) => {
-    const isDeleted = blogsRepository.delete(+req.params.id);
+    const isDeleted = blogsRepository.delete(req.params.id);
 
     if (!isDeleted) {
         res

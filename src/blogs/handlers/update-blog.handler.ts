@@ -8,7 +8,7 @@ export const updateBlogHandler = (
     req: Request<{ id: string }, {}, BlogsInputDto>,
     res: Response
 ) => {
-    const isUpdate = blogsRepository.update(+req.params.id, req.body);
+    const isUpdate = blogsRepository.update(req.params.id, req.body);
 
     if (!isUpdate) {
         res

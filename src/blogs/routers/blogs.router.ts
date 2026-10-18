@@ -18,14 +18,14 @@ blogsRouter
         BLOGS_ROUTES.BY_ID,
         idValidation,
         inputValidationResultMiddleware,
-        getBlogHandler
+        getBlogHandler,
     )
 
     .post(
         BLOGS_ROUTES.ROOT,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
-        createBlogHandler
+        createBlogHandler,
     )
 
     .put(
@@ -33,12 +33,12 @@ blogsRouter
         idValidation,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
-        updateBlogHandler
+        updateBlogHandler,
     )
 
     .delete(
         BLOGS_ROUTES.BY_ID,
         idValidation,
         inputValidationResultMiddleware,
-        deleteBlogHandler
+        deleteBlogHandler,
     );

@@ -4,7 +4,7 @@ import { blogsRepository } from "../repositories/blogs.repository";
 import { createErrorMessage } from "../../core/validation/input-validation-result.middleware";
 
 export const getBlogHandler = (req: Request<{ id: string }>, res: Response) => {
-    const blog = blogsRepository.findById(+req.params.id);
+    const blog = blogsRepository.findById(req.params.id);
 
     if (!blog) {
         res

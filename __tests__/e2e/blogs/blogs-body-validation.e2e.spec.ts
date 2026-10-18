@@ -1,10 +1,10 @@
 import request from "supertest";
 import express from "express";
-import { setupApp } from "../../src/setup-app";
-import { BlogsInputDto } from "../../src/blogs/dto/blogs.input.dto";
-import { TESTING_PATH, TESTING_ROUTES } from "../../src/testing/constants/testing.paths";
-import { HttpStatus } from "../../src/core/types/http-statuses";
-import { BLOGS_PATH } from "../../src/blogs/constants/blogs.paths";
+import { setupApp } from "../../../src/setup-app";
+import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
+import { TESTING_PATH, TESTING_ROUTES } from "../../../src/testing/constants/testing.paths";
+import { HttpStatus } from "../../../src/core/types/http-statuses";
+import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 
 describe('Blogs body validation tests', () => {
     const app = express();
