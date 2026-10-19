@@ -33,8 +33,8 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(getNewBlog1.body.errorMessages).toBeInstanceOf(Array);
-        expect(getNewBlog1.body.errorMessages).toHaveLength(3);
+        expect(getNewBlog1.body.errorsMessages).toBeInstanceOf(Array);
+        expect(getNewBlog1.body.errorsMessages).toHaveLength(3);
 
         const getNewBlog2 = await request(app)
             .post(BLOGS_PATH)
@@ -46,8 +46,8 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(getNewBlog2.body.errorMessages).toBeInstanceOf(Array);
-        expect(getNewBlog2.body.errorMessages).toHaveLength(3);
+        expect(getNewBlog2.body.errorsMessages).toBeInstanceOf(Array);
+        expect(getNewBlog2.body.errorsMessages).toHaveLength(3);
 
         const getNewBlog3 = await request(app)
             .post(BLOGS_PATH)
@@ -57,8 +57,8 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(getNewBlog3.body.errorMessages).toBeInstanceOf(Array);
-        expect(getNewBlog3.body.errorMessages).toHaveLength(1);
+        expect(getNewBlog3.body.errorsMessages).toBeInstanceOf(Array);
+        expect(getNewBlog3.body.errorsMessages).toHaveLength(1);
     });
 
     it(`❌shouldn't update blog when incorrect body passed; POST /blogs/:id`, async () => {
@@ -77,8 +77,8 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(invalidDataSet1.body.errorMessages).toBeInstanceOf(Array);
-        expect(invalidDataSet1.body.errorMessages).toHaveLength(3);
+        expect(invalidDataSet1.body.errorsMessages).toBeInstanceOf(Array);
+        expect(invalidDataSet1.body.errorsMessages).toHaveLength(3);
 
         const invalidDataSet2 = await request(app)
             .post(BLOGS_PATH)
@@ -90,8 +90,8 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(invalidDataSet2.body.errorMessages).toBeInstanceOf(Array);
-        expect(invalidDataSet2.body.errorMessages).toHaveLength(3);
+        expect(invalidDataSet2.body.errorsMessages).toBeInstanceOf(Array);
+        expect(invalidDataSet2.body.errorsMessages).toHaveLength(3);
 
         const invalidDataSet3 = await request(app)
             .post(BLOGS_PATH)
@@ -101,7 +101,7 @@ describe('Blogs body validation tests', () => {
             })
             .expect(HttpStatus.BadRequest_400);
 
-        expect(invalidDataSet3.body.errorMessages).toBeInstanceOf(Array);
-        expect(invalidDataSet3.body.errorMessages).toHaveLength(1);
+        expect(invalidDataSet3.body.errorsMessages).toBeInstanceOf(Array);
+        expect(invalidDataSet3.body.errorsMessages).toHaveLength(1);
     });
 });

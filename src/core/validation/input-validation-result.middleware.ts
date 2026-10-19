@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ValidationErrorType, ValidationErrorDto } from "../types/validation-error";
 import { ValidationError, validationResult } from "express-validator";
-import {HttpStatus} from "../types/http-statuses";
+import { HttpStatus } from "../types/http-statuses";
 
 // Оборачивает список ошибок в единый формат: { message: ..., field: ... }.
 export const createErrorMessage = (
