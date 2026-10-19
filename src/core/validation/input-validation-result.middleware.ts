@@ -7,7 +7,7 @@ import {HttpStatus} from "../types/http-statuses";
 export const createErrorMessage = (
     error: ValidationErrorType[]
 ): ValidationErrorDto => {
-    return { errorMessages: error};
+    return { errorsMessages: error};
 };
 
 // Хелпер, преобразовывающий ошибки express-validatr'а к нужному нам формату.
@@ -31,7 +31,7 @@ export const inputValidationResultMiddleware = (
         .array({ onlyFirstError: true });
 
     if (errors.length > 0) {
-        res.status(HttpStatus.BadRequest_400).json({ errorMessages: errors });
+        res.status(HttpStatus.BadRequest_400).json({ errorsMessages: errors });
         return;
     }
 

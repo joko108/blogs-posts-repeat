@@ -5,4 +5,4 @@ export type ValidationErrorType = {
 };
 
 // Единый формат сообщений об ошибке.
-export type ValidationErrorDto = { errorMessages: ValidationErrorType[] };
+export type ValidationErrorDto = { errorsMessages: ValidationErrorType[] };
