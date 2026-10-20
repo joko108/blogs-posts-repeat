@@ -16,6 +16,7 @@ export const initCollections = (db: Db): void => {
     postCollection = db.collection<Post>(POST_COLLECTION_NAME);
 };
 
+// Return all collections (for e2e-tests).
 export const getAllCollections = (): Collection<any>[] => {
     return [blogCollection, postCollection];
 };
