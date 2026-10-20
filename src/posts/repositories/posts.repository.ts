@@ -1,54 +1,31 @@
+import { ObjectId, WithId } from "mongodb";
 import { Post } from "../types/post";
-import { db } from "../../db/in-memory.db";
+import { postCollection } from "../../db/collections";
 
 export const postsRepository = {
-    findAll(): Post[] {
-        return db.posts;
+    async findAll(): Promise<WithId<Post>[]> {
+        return postCollection.find().toArray();
+    },
+    
+    async findById(id: string): Promise<WithId<Post> | null> {
+        return postCollection.findOne({ _id: new ObjectId(id) });
+    },
+    
+    async create(newPost: Post): Promise<WithId<Post>> {
+        const insertResult = await postCollection.insertOne(newPost);
+        return { ...newPost, _id: insertResult.insertedId };
     },
 
-    findById(id: string): Post | null {
-        return db.posts.find((p) => p.id === id) ?? null;
+    async update(id: string, post: Omit<Post, 'blogName' | 'createdAt'>): Promise<boolean> {
+        const updateResult = await postCollection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: post },
+        );
+        return updateResult.matchedCount > 0;
     },
 
-    create(newPost: Omit<Post, 'id' | 'blogName'>): Post | null {
-        const blog = db.blogs.find((b) => b.id === newPost.blogId);
-
-        if (!blog) {
-            return null;
-        }
-
-        const lastPost = db.posts[db.posts.length - 1];
-        const nextId = lastPost ? lastPost.id + 1 : 1;
-
-        const created: Post = {
-            id: String(nextId),
-            ...newPost,
-            blogName: blog.name,
-        };
-
-        db.posts.push(created);
-        return created;
-    },
-
-    update(id: string, post: Omit<Post, 'id' | 'blogName'>): boolean {
-        const index = db.posts.findIndex((p) => p.id === id);
-
-        if (index === -1) {
-            return false;
-        }
-
-        db.posts[index] = { ...db.posts[index], ...post };
-        return true;
-    },
-
-    delete(id: string): boolean {
-        const index = db.posts.findIndex((p) => p.id === id);
-
-        if (index === -1) {
-            return false;
-        }
-
-        db.posts.splice(index, 1);
-        return true;
+    async delete(id: string): Promise<boolean> {
+        const deleteResult = await postCollection.deleteOne({ _id: new ObjectId(id) });
+        return deleteResult.deletedCount > 0;
     },
 };

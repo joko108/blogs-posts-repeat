@@ -1,4 +1,4 @@
-// Данные от клиента на создание/обновление блога.
+// Data from client to create/update blog.
 export type BlogsInputDto = {
     name: string,
     description: string,

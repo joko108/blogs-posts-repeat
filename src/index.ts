@@ -1,12 +1,21 @@
 import express from "express";
 import { setupApp } from "./setup-app";
 import { SETTINGS } from "./settings/config";
+import {runDB} from "./db/mongo.db";
 
-const app = express();
-setupApp(app);
+// Init main function because connection to database is async.
+const bootstrap = async () => {
+    const app = express();
+    setupApp(app);
+    const PORT = SETTINGS.PORT;
 
-const PORT = SETTINGS.PORT;
+    // Connect to database before start server.
+    await runDB(SETTINGS.MONGO_URL);
 
-app.listen(PORT, () => {
-    console.log(`Example app listening on port: ${PORT}`);
-});
+    app.listen(PORT, () => {
+        console.log(`Example app listening on port: ${PORT}`);
+    });
+    return app;
+};
+
+bootstrap();

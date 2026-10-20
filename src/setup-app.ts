@@ -9,6 +9,7 @@ import { postsRouter } from "./posts/routers/posts.router";
 export const setupApp = (app: Express) => {
     app.use(express.json());
 
+    // Every module connect to own base endpoint.
     app.use(BLOGS_PATH, blogsRouter);
     app.use(POSTS_PATH, postsRouter);
     app.use(TESTING_PATH, testingRouter);

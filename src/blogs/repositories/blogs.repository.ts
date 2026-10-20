@@ -1,47 +1,41 @@
-import { db } from "../../db/in-memory.db";
+import { WithId, ObjectId } from "mongodb";
 import { Blog } from "../types/blog";
+import { blogCollection } from "../../db/collections";
 
 export const blogsRepository = {
-    findAll(): Blog[] {
-        return db.blogs;
+    async findAll(): Promise<WithId<Blog>[]> {
+        return blogCollection.find().toArray();
     },
 
-    findById(id: string): Blog | null {
-        return db.blogs.find((b) => b.id === id) ?? null;
+    async findById(id: string): Promise<WithId<Blog> | null> {
+        return blogCollection.findOne({ _id: new ObjectId(id) });
     },
 
-    create(newBlog: Omit<Blog, 'id'>): Blog {
-        const lastBlog = db.blogs[db.blogs.length - 1];
-        const nextId = lastBlog ? lastBlog.id + 1 : 1
-
-        const created: Blog = {
-            id: String(nextId),
-            ...newBlog,
-        };
-
-        db.blogs.push(created);
-        return created;
+    // Accept the domain document and add the id.
+    async create(newBlog: Blog): Promise<WithId<Blog>> {
+        const insertResult = await blogCollection.insertOne(newBlog);
+        return { ...newBlog, _id: insertResult.insertedId };
     },
 
-    update(id: string, blog: Omit<Blog, 'id'>): boolean {
-        const index = db.blogs.findIndex((b) => b.id === id);
-
-        if (index === -1) {
-            return false;
-        }
-
-        db.blogs[index] = { ...db.blogs[index], ...blog };
-        return true;
+    // Accept the domain document without 'createdAt', the mapper from handler adds it.
+    // Return 'true' if blog is found and update, else 'false'.
+    async update(
+        id: string,
+        blog: Omit<Blog, 'createdAt' | 'isMembership'>
+    ): Promise<boolean> {
+        const updateResult = await blogCollection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: blog },
+        );
+        return updateResult.matchedCount > 0;
     },
 
-    delete(id: string): boolean {
-        const index = db.blogs.findIndex((b) => b.id === id);
+    // Return 'true' if blog is found and delete, else 'false'.
+    async delete(id: string): Promise<boolean> {
+        const deleteResult = await blogCollection.deleteOne({
+            _id: new ObjectId(id),
+        });
 
-        if (index === -1) {
-            return false;
-        }
-
-        db.blogs.splice(index, 1);
-        return true;
+        return deleteResult.deletedCount > 0;
     },
 };

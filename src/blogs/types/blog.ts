@@ -1,7 +1,8 @@
-// Модель блога.
+// Blog's model.
 export type Blog = {
-    id: string,
-    name: string,
-    description: string,
-    websiteUrl: string,
+    name: string;
+    description: string;
+    websiteUrl: string;
+    createdAt: Date;
+    isMembership: boolean;
 };

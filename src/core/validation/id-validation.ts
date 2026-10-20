@@ -5,5 +5,5 @@ export const idValidation = param('id')
     .withMessage('ID is required')
     .isString()
     .withMessage('ID must be a string')
-    .isNumeric()
-    .withMessage('ID should be a numeric type');
+    .isMongoId()
+    .withMessage('Incorrect format of ObjectId');

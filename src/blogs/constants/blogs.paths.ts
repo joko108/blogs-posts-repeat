@@ -1,7 +1,7 @@
-// Базовый путь.
+// Main endpoint.
 export const BLOGS_PATH = '/blogs';
 
-// Относительные подмаршуты.
+// Secondary sub-routes.
 export const BLOGS_ROUTES = {
     ROOT: '',
     BY_ID: '/:id',
