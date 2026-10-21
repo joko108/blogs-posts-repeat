@@ -49,8 +49,8 @@ describe('Posts API Tests', () => {
         expect(getCreatedPostResponse).toEqual({
             ...createdPost,
             id: expect.any(String),
-            blogId: expect.any(String),
             blogName: expect.any(String),
+            createdAt: expect.any(String),
         });
     });
 
