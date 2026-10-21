@@ -3,9 +3,9 @@ import { PostInputDto } from "../../dto/post.input.dto";
 import { Post } from "../../types/post";
 import { postsRepository } from "../../repositories/posts.repository";
 import { HttpStatus } from "../../../core/types/http-statuses";
-import {mapToPostViewModelUtils} from "../mappers/map-to-post-view-model.utils";
-import {blogsRepository} from "../../../blogs/repositories/blogs.repository";
-import {createErrorMessage} from "../../../core/validation/input-validation-result.middleware";
+import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
+import { blogsRepository } from "../../../blogs/repositories/blogs.repository";
+import { createErrorMessage } from "../../../core/validation/input-validation-result.middleware";
 
 export const createPostHandler = async (
     req: Request<{}, {}, PostInputDto>,
@@ -13,7 +13,7 @@ export const createPostHandler = async (
 ) => {
     try {
 
-        // At first, we need to find the existing blog (to extract it's name).
+        // At first, we need to find the existing blog (to extract its name).
         const blog = await blogsRepository.findById(req.body.blogId);
         if (!blog) {
             res
