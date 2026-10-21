@@ -56,6 +56,8 @@ describe('Blogs API Tests', () => {
         expect(blog).toEqual({
             ...createdBlog,
             id: expect.any(String),
+            createdAt: expect.any(String),
+            isMembership: expect.any(Boolean),
         });
     });
 
@@ -77,8 +79,8 @@ describe('Blogs API Tests', () => {
             name: blogUpdateData.name,
             description: blogUpdateData.description,
             websiteUrl: blogUpdateData.websiteUrl,
-            createdAt: expect.any(String),
-            isMembership: expect.any(Boolean),
+            createdAt: createdBlog.createdAt,
+            isMembership: createdBlog.isMembership,
         });
     });
 

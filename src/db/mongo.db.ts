@@ -2,7 +2,7 @@ import { Db, MongoClient } from "mongodb";
 import { SETTINGS } from "../settings/config";
 import { initCollections } from "./collections";
 
-// Obj for connect to database.
+// Object for connect to database.
 export let client: MongoClient;
 
 // Connect to database.
@@ -23,7 +23,7 @@ export const runDB = async (url: string): Promise<void> => {
     }
 };
 
-// For tests.
+// For e2e-tests.
 export const stopDb = async () => {
     if (!client) {
         throw new Error('❌Not active client');
