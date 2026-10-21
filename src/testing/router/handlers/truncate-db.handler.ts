@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
-import {getAllCollections} from "../../../db/collections";
+import { getAllCollections } from "../../../db/collections";
 
-// Clear DB (use on the e2e-tests before it start).
+// Clear DB (use in tests before it start).
 export const truncateDbHandler = async (_req: Request, res: Response) => {
     try {
         // Clear all collections (for tests).
