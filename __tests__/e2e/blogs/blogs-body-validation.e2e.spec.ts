@@ -4,11 +4,11 @@ import { setupApp } from "../../../src/setup-app";
 import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
 import { HttpStatus } from "../../../src/core/types/http-statuses";
 import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
-import {runDB, stopDb} from "../../../src/db/mongo.db";
-import {SETTINGS} from "../../../src/settings/config";
-import {clearDb} from "../../utils/clear-db";
-import {getBlogDto} from "../../utils/drivers/get-blog-dto";
-import {generateBasicAuthToken} from "../../utils/generate-admin-auth-token";
+import { runDB, stopDb } from "../../../src/db/mongo.db";
+import { SETTINGS } from "../../../src/settings/config";
+import { clearDb } from "../../utils/clear-db";
+import { getBlogDto } from "../../utils/drivers/get-blog-dto";
+import { generateBasicAuthToken } from "../../utils/generate-admin-auth-token";
 
 describe('Blogs body validation tests', () => {
     const app = express();
