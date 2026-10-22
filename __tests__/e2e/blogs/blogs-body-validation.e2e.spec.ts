@@ -7,7 +7,7 @@ import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 import { runDB, stopDb } from "../../../src/db/mongo.db";
 import { SETTINGS } from "../../../src/settings/config";
 import { clearDb } from "../../utils/clear-db";
-import { getBlogDto } from "../../utils/drivers/get-blog-dto";
+import { getBlogDto } from "../../utils/blogs/get-blog-dto";
 import { generateBasicAuthToken } from "../../utils/generate-admin-auth-token";
 
 describe('Blogs body validation tests', () => {

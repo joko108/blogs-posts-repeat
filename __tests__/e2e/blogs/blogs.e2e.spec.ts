@@ -7,10 +7,10 @@ import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 import { runDB, stopDb } from "../../../src/db/mongo.db";
 import { SETTINGS } from "../../../src/settings/config";
 import { clearDb } from "../../utils/clear-db";
-import { getBlogDto } from "../../utils/drivers/get-blog-dto";
-import { createBlog } from "../../utils/drivers/create-blog";
-import { getBlogById } from "../../utils/drivers/get-blog-by-id";
-import { updateBlog } from "../../utils/drivers/update-blog";
+import { getBlogDto } from "../../utils/blogs/get-blog-dto";
+import { createBlog } from "../../utils/blogs/create-blog";
+import { getBlogById } from "../../utils/blogs/get-blog-by-id";
+import { updateBlog } from "../../utils/blogs/update-blog";
 import { generateBasicAuthToken } from "../../utils/generate-admin-auth-token";
 
 describe('Blogs API Tests', () => {
