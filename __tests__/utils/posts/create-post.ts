@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { PostInputDto } from "../../../src/posts/dto/post.input.dto";
 import { PostViewModel } from "../../../src/posts/types/post-view-model";
-import { createBlog } from "../drivers/create-blog";
+import { createBlog } from "../blogs/create-blog";
 import { getPostDto } from "./get-post-dto";
 import request from "supertest";
 import { POSTS_PATH } from "../../../src/posts/constants/posts.paths";
