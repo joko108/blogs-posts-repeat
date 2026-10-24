@@ -9,7 +9,6 @@ export const deleteBlogHandler = async (
 ) => {
     try {
         const blog = await blogsRepository.findById(req.params.id);
-
         if (!blog) {
             res
                 .status(HttpStatus.NotFound_404)

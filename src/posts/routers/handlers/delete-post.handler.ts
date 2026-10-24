@@ -8,7 +8,7 @@ export const deletePostHandler = async (
     res: Response
 ) => {
     try {
-        const post = postsRepository.findById(req.params.id);
+        const post = await postsRepository.findById(req.params.id);
         if (!post) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -19,6 +19,6 @@ export const deletePostHandler = async (
         await postsRepository.delete(req.params.id);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch {
-        res.sendStatus(HttpStatus.NoContent_204);
+        res.sendStatus(HttpStatus.InternalServerError_500);
     }
 };
