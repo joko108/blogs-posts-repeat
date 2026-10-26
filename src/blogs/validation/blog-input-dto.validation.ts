@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 
+// Validation of fields received from the client (from POST and PUT requests).
 const nameValidation = body('name')
     .exists()
     .withMessage('Name is required')
