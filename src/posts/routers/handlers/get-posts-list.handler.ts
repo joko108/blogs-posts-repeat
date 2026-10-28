@@ -1,15 +1,24 @@
 import { Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { postsRepository } from "../../repositories/posts.repository";
-import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
+import { PostsForBlogQueryInput } from "../input/post-query.input";
+import { mapToPostsListViewModelUtils } from "../mappers/map-to-posts-list-view-model.utils";
 
-export const getPostsListHandler = async (_req: Request, res: Response) => {
+export const getPostsListHandler = async (
+    req: Request<{}, {}, {}, PostsForBlogQueryInput>,
+    res: Response
+) => {
     try {
-        const posts = await postsRepository.findAll();
+        const queryInput = req.query;
+        const { items, totalCount } = await postsRepository.findMany(queryInput);
 
         // Return the view-model to the client, not the raw document.
-        const postViewModel = posts.map(mapToPostViewModelUtils);
-        res.status(HttpStatus.Ok_200).send(postViewModel);
+        const output = mapToPostsListViewModelUtils(items, {
+            pageNumber: queryInput.pageNumber,
+            pageSize: queryInput.pageSize,
+            totalCount,
+        });
+        res.status(HttpStatus.Ok_200).send(output);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);
     }

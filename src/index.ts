@@ -1,7 +1,7 @@
 import express from "express";
 import { setupApp } from "./setup-app";
 import { SETTINGS } from "./settings/config";
-import {runDB} from "./db/mongo.db";
+import { runDB } from "./db/mongo.db";
 
 // Init main function because connection to database is async.
 const bootstrap = async () => {

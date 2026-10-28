@@ -5,6 +5,8 @@ import { HttpStatus } from "../../../core/types/http-statuses";
 import { blogsRepository } from "../../repositories/blogs.repository";
 import { mapToBlogViewModelUtils } from "../mappers/map-to-blog-view-model.utils";
 
+// Controller for create blog, it don't know what happen in database,
+// his task: accept request -> redirect it to the repo -> accept received data -> return response.
 export const createBlogHandler = async (
     req: Request<{}, {}, BlogsInputDto>,
     res: Response

@@ -1,15 +1,24 @@
 import { Request, Response } from "express";
-import { HttpStatus } from "../../../core/types/http-statuses";
+import { BlogQueryInput } from "../input/blog-query.input";
 import { blogsRepository } from "../../repositories/blogs.repository";
-import { mapToBlogViewModelUtils } from "../mappers/map-to-blog-view-model.utils";
+import { mapToBlogsListViewModelUtils } from "../mappers/map-to-blogs-list-view-model.utils";
+import { HttpStatus } from "../../../core/types/http-statuses";
 
-export const getBlogsListHandler = async (_req: Request, res: Response) => {
+export const getBlogsListHandler = async (
+    req: Request<{}, {}, {}, BlogQueryInput>,
+    res: Response
+) => {
     try {
-        const blogs = await blogsRepository.findAll();
+        const queryInput = req.query;
+        const { items, totalCount } = await blogsRepository.findMany(queryInput);
 
-        // Return the view-model to the client, not the raw document.
-        const blogsViewModel = blogs.map(mapToBlogViewModelUtils);
-        res.status(HttpStatus.Ok_200).send(blogsViewModel);
+        const output = mapToBlogsListViewModelUtils(items, {
+            pageNumber: queryInput.pageNumber,
+            pageSize: queryInput.pageSize,
+            totalCount,
+        });
+
+        res.status(HttpStatus.Ok_200).send(output);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);
     }

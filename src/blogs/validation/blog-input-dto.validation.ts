@@ -25,7 +25,7 @@ const websiteValidation = body('websiteUrl')
     .isString()
     .withMessage('Website should be a string')
     .trim()
-    .isLength({ min: 12, max: 500 })
+    .isLength({ min: 12, max: 100 })
     .withMessage('Invalid length of Website')
     .isURL()
     .withMessage('Website name should be URL type');

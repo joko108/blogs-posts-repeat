@@ -5,7 +5,7 @@ import { postsRepository } from "../../repositories/posts.repository";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
 import { blogsRepository } from "../../../blogs/repositories/blogs.repository";
-import { createErrorMessage } from "../../../core/validation/input-validation-result.middleware";
+import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
 
 export const createPostHandler = async (
     req: Request<{}, {}, PostInputDto>,

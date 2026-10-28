@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { blogsRepository } from "../../repositories/blogs.repository";
-import { createErrorMessage } from "../../../core/validation/input-validation-result.middleware";
+import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
 import { mapToBlogViewModelUtils } from "../mappers/map-to-blog-view-model.utils";
 
 export const getBlogHandler = async (req: Request<{ id: string }>, res: Response) => {

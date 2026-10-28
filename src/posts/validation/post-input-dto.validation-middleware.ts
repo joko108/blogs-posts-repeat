@@ -35,9 +35,16 @@ const blogIdValidation = body('blogId')
     .isMongoId()
     .withMessage('Blog ID must be a MongoId type');
 
-export const postInputDtoValidation = [
+export const postInputDtoValidationMiddleware = [
     titleValidation,
     shortDescriptionValidation,
     contentValidation,
     blogIdValidation
+];
+
+// For endpoint '/blogs/:blogId/posts', blogId taken from URL params.
+export const postInputDtoWithoutBlogIdValidationMiddleware = [
+    titleValidation,
+    shortDescriptionValidation,
+    contentValidation,
 ];
