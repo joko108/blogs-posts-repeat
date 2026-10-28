@@ -19,7 +19,7 @@ export const paginationSortingValidationMiddleware = <T extends string>(
 
         query('pageSize')
             .default(DEFAULT_PAGE_SIZE)
-            .isInt({ min: 10, max: 100 })
+            .isInt({ min: 1, max: 100 })
             .withMessage('Page size must be between 1 and 100')
             .toInt(),
 
