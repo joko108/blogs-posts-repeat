@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { PostInputDto } from "../../dto/post.input.dto";
-import { postsRepository } from "../../repositories/posts.repository";
+import { PostInputDto } from "../../attributes/dto/post.input.dto";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
+import { postsService } from "../../attributes/posts.service";
 
 export const updatePostHandler = async (
     req: Request<{ id: string }, {}, PostInputDto>,
     res: Response
 ) => {
     try {
-        const post = await postsRepository.findById(req.params.id);
+        const post = await postsService.findById(req.params.id);
         if (!post) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -17,7 +17,7 @@ export const updatePostHandler = async (
             return;
         }
 
-        await postsRepository.update(req.params.id, req.body);
+        await postsService.update(req.params.id, req.body);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);

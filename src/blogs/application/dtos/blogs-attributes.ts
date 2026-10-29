@@ -1,5 +1,5 @@
 // Data from client to create/update blog.
-export type BlogsInputDto = {
+export type BlogsAttributes = {
     name: string,
     description: string,
     websiteUrl: string,

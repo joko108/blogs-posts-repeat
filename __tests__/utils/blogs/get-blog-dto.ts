@@ -1,6 +1,6 @@
-import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
+import { BlogsAttributes } from "../../../src/blogs/application/dtos/blogs-attributes";
 
-export const getBlogDto = (): BlogsInputDto => {
+export const getBlogDto = (): BlogsAttributes => {
     return {
         name: 'Valentin blog',
         description: 'Just own blog',

@@ -37,17 +37,15 @@ export const blogsRepository = {
         return blogCollection.findOne({ _id: new ObjectId(id) });
     },
 
-    // Accept the domain document and add the id.
-    async create(newBlog: Blog): Promise<WithId<Blog>> {
+    async create(newBlog: Blog): Promise<string> {
         const insertResult = await blogCollection.insertOne(newBlog);
-        return { ...newBlog, _id: insertResult.insertedId };
+        return insertResult.insertedId.toString();
     },
 
     // Accept the domain document without 'createdAt', the mapper from handler adds it.
     // Return 'true' if blog is found and update, else 'false'.
     async update(
-        id: string,
-        blog: Omit<Blog, 'createdAt' | 'isMembership'>
+        id: string, blog: Omit<Blog, 'createdAt' | 'isMembership'>
     ): Promise<boolean> {
         const updateResult = await blogCollection.updateOne(
             { _id: new ObjectId(id) },

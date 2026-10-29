@@ -1,6 +1,6 @@
 import request from "supertest";
 import { Express } from "express";
-import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
+import { BlogsAttributes } from "../../../src/blogs/application/dtos/blogs-attributes";
 import { getBlogDto } from "./get-blog-dto";
 import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 import { generateBasicAuthToken } from "../generate-admin-auth-token";
@@ -9,10 +9,10 @@ import { HttpStatus } from "../../../src/core/types/http-statuses";
 export const updateBlog = async (
     app: Express,
     blogId: string,
-    blogDto?: BlogsInputDto,
+    blogDto?: BlogsAttributes,
 ): Promise<void> => {
 
-    const defaultBlog: BlogsInputDto = getBlogDto();
+    const defaultBlog: BlogsAttributes = getBlogDto();
     const testBlogData = { ...defaultBlog, ...blogDto };
 
     // We don't need a constant, cause function return nothing.

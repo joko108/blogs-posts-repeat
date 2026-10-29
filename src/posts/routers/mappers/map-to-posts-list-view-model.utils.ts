@@ -1,4 +1,4 @@
-import { WithId} from "mongodb";
+import { WithId } from "mongodb";
 import { Post } from "../../types/post";
 import { PostsListViewModel } from "../../types/posts-list-view-model";
 import { mapToPostViewModelUtils } from "./map-to-post-view-model.utils";

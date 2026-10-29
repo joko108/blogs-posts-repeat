@@ -1,7 +1,7 @@
 import request from "supertest";
 import express from "express";
 import { setupApp } from "../../../src/setup-app";
-import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
+import { BlogsAttributes } from "../../../src/blogs/application/dtos/blogs-attributes";
 import { HttpStatus } from "../../../src/core/types/http-statuses";
 import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 import { runDB, stopDb } from "../../../src/db/mongo.db";
@@ -14,7 +14,7 @@ describe('Blogs body validation tests', () => {
     const app = express();
     setupApp(app);
 
-    const correctTestBlogData: BlogsInputDto = getBlogDto();
+    const correctTestBlogData: BlogsAttributes = getBlogDto();
 
     beforeAll(async () => {
         await runDB(SETTINGS.MONGO_URL);

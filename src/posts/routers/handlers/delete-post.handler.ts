@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { postsRepository } from "../../repositories/posts.repository";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
+import { postsService } from "../../attributes/posts.service";
 
 export const deletePostHandler = async (
     req: Request<{ id: string }>,
     res: Response
 ) => {
     try {
-        const post = await postsRepository.findById(req.params.id);
+        const post = await postsService.findById(req.params.id);
         if (!post) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -16,7 +16,7 @@ export const deletePostHandler = async (
             return;
         }
 
-        await postsRepository.delete(req.params.id);
+        await postsService.delete(req.params.id);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { BlogQueryInput } from "../input/blog-query.input";
-import { blogsRepository } from "../../repositories/blogs.repository";
 import { mapToBlogsListViewModelUtils } from "../mappers/map-to-blogs-list-view-model.utils";
 import { HttpStatus } from "../../../core/types/http-statuses";
+import { blogsService } from "../../application/blogs.service";
 
 export const getBlogsListHandler = async (
     req: Request<{}, {}, {}, BlogQueryInput>,
@@ -10,7 +10,7 @@ export const getBlogsListHandler = async (
 ) => {
     try {
         const queryInput = req.query;
-        const { items, totalCount } = await blogsRepository.findMany(queryInput);
+        const { items, totalCount } = await blogsService.findMany(queryInput);
 
         const output = mapToBlogsListViewModelUtils(items, {
             pageNumber: queryInput.pageNumber,

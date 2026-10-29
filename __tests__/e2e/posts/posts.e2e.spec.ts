@@ -7,7 +7,7 @@ import { runDB, stopDb } from "../../../src/db/mongo.db";
 import { clearDb } from "../../utils/clear-db";
 import { SETTINGS } from "../../../src/settings/config";
 import { createPost } from "../../utils/posts/create-post";
-import { PostInputDto } from "../../../src/posts/dto/post.input.dto";
+import { PostInputDto } from "../../../src/posts/attributes/dto/post.input.dto";
 import { updatePost } from "../../utils/posts/update-post";
 import { getPostById } from "../../utils/posts/get-post-by-id";
 import { generateBasicAuthToken } from "../../utils/generate-admin-auth-token";

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { postsRepository } from "../../repositories/posts.repository";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
-import {mapToPostViewModelUtils} from "../mappers/map-to-post-view-model.utils";
+import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
+import { postsService } from "../../attributes/posts.service";
 
 export const getPostHandler = async (req: Request<{id: string}>, res: Response) => {
     try {
-        const post = await postsRepository.findById(req.params.id);
+        const post = await postsService.findById(req.params.id);
 
         if (!post) {
             res

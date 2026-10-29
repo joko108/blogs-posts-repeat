@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
-import { postsRepository } from "../../repositories/posts.repository";
 import { PostsForBlogQueryInput } from "../input/post-query.input";
 import { mapToPostsListViewModelUtils } from "../mappers/map-to-posts-list-view-model.utils";
+import { postsService } from "../../attributes/posts.service";
 
 export const getPostsListHandler = async (
     req: Request<{}, {}, {}, PostsForBlogQueryInput>,
@@ -10,7 +10,7 @@ export const getPostsListHandler = async (
 ) => {
     try {
         const queryInput = req.query;
-        const { items, totalCount } = await postsRepository.findMany(queryInput);
+        const { items, totalCount } = await postsService.findMany(queryInput);
 
         // Return the view-model to the client, not the raw document.
         const output = mapToPostsListViewModelUtils(items, {

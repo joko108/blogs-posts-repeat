@@ -1,20 +1,18 @@
 import { Request, Response } from "express";
-import { PostInputDto } from "../../dto/post.input.dto";
-import { Post } from "../../types/post";
-import { postsRepository } from "../../repositories/posts.repository";
+import { PostInputDto } from "../../attributes/dto/post.input.dto";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
-import { blogsRepository } from "../../../blogs/repositories/blogs.repository";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
+import { postsService } from "../../attributes/posts.service";
+import { blogsService } from "../../../blogs/application/blogs.service";
 
 export const createPostHandler = async (
     req: Request<{}, {}, PostInputDto>,
     res: Response
 ) => {
     try {
-
         // At first, we need to find the existing blog (to extract its name).
-        const blog = await blogsRepository.findById(req.body.blogId);
+        const blog = await blogsService.findById(req.body.blogId);
         if (!blog) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -22,14 +20,15 @@ export const createPostHandler = async (
             return;
         }
 
-        // DTO -> domain model; 'blogName and 'cratedAt' adds here.
-        const newPost: Post = {
-            ...req.body,
-            blogName: blog.name,
-            createdAt: new Date(),
-        };
+        const createdPostId = await postsService.create(req.body, blog.name);
+        const createdPost = await postsService.findById(createdPostId);
+        if (!createdPost) {
+            res
+                .status(HttpStatus.NotFound_404)
+                .send(createErrorMessage([{ message: 'Post not found', field: 'id' }]));
+            return;
+        }
 
-        const createdPost = await postsRepository.create(newPost);
         const postViewModel = mapToPostViewModelUtils(createdPost);
         res.status(HttpStatus.Created_201).send(postViewModel);
     } catch {

@@ -25,9 +25,9 @@ export const postsRepository = {
         return postCollection.findOne({ _id: new ObjectId(id) });
     },
     
-    async create(newPost: Post): Promise<WithId<Post>> {
+    async create(newPost: Post): Promise<string> {
         const insertResult = await postCollection.insertOne(newPost);
-        return { ...newPost, _id: insertResult.insertedId };
+        return insertResult.insertedId.toString();
     },
 
     async update(id: string, post: Omit<Post, 'blogName' | 'createdAt'>): Promise<boolean> {

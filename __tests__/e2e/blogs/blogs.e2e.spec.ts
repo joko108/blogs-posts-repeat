@@ -1,7 +1,7 @@
 import request from "supertest";
 import express from "express";
 import { setupApp } from "../../../src/setup-app";
-import { BlogsInputDto } from "../../../src/blogs/dto/blogs.input.dto";
+import { BlogsAttributes } from "../../../src/blogs/application/dtos/blogs-attributes";
 import { HttpStatus } from "../../../src/core/types/http-statuses";
 import { BLOGS_PATH } from "../../../src/blogs/constants/blogs.paths";
 import { runDB, stopDb } from "../../../src/db/mongo.db";
@@ -27,7 +27,7 @@ describe('Blogs API Tests', () => {
     });
 
     it(`✅should create blog; POST /blogs`, async () => {
-        const newBlog: BlogsInputDto = {
+        const newBlog: BlogsAttributes = {
             ...getBlogDto(),
             name: 'Alex',
             websiteUrl: 'https://alexblog.com',
@@ -64,7 +64,7 @@ describe('Blogs API Tests', () => {
     it(`✅should update blog by id when correct body passed; PUT /blogs/:id`, async () => {
         const createdBlog = await createBlog(app);
 
-        const blogUpdateData: BlogsInputDto = {
+        const blogUpdateData: BlogsAttributes = {
             name: 'Ann',
             description: 'Some description',
             websiteUrl: 'https://ann.superblog.com',
