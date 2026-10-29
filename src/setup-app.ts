@@ -6,6 +6,8 @@ import { testingRouter } from "./testing/router/testing.router";
 import { POSTS_PATH } from "./posts/constants/posts.paths";
 import { postsRouter } from "./posts/routers/posts.router";
 import { HttpStatus } from "./core/types/http-statuses";
+import { USERS_PATH } from "./users/constants/user.paths";
+import { usersRouter } from "./users/routes/users.router";
 
 export const setupApp = (app: Express) => {
     app.use(express.json());
@@ -18,5 +20,6 @@ export const setupApp = (app: Express) => {
     // Every module connect to own base endpoint.
     app.use(BLOGS_PATH, blogsRouter);
     app.use(POSTS_PATH, postsRouter);
+    app.use(USERS_PATH, usersRouter);
     app.use(TESTING_PATH, testingRouter);
 };
