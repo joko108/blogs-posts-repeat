@@ -5,7 +5,7 @@ import { mapToBlogViewModelUtils } from "../mappers/map-to-blog-view-model.utils
 import { blogsService } from "../../application/blogs.service";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
 
-// Controller for create blog, it don't know what happen in database,
+// Controller for create blog, it don't know what happen in service and database,
 // his task: accept request -> redirect it to the repo -> accept received data -> return response.
 export const createBlogHandler = async (
     req: Request<{}, {}, BlogsAttributes>,

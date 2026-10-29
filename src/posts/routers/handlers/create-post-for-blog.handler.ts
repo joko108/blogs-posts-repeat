@@ -1,4 +1,4 @@
-import { PostForBlogInputDto } from "../../attributes/dto/post-for-blog.input.dto";
+import { PostForBlogAttributes } from "../../attributes/dto/post-for-blog.attributes";
 import { Request, Response } from "express";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
@@ -7,7 +7,7 @@ import { blogsService } from "../../../blogs/application/blogs.service";
 import { postsService } from "../../attributes/posts.service";
 
 export const createPostForBlogHandler = async (
-    req: Request<{ blogId: string }, {}, PostForBlogInputDto>,
+    req: Request<{ blogId: string }, {}, PostForBlogAttributes>,
     res: Response
 ) => {
     try {

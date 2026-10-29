@@ -7,7 +7,7 @@ import { runDB, stopDb } from "../../../src/db/mongo.db";
 import { clearDb } from "../../utils/clear-db";
 import { SETTINGS } from "../../../src/settings/config";
 import { createPost } from "../../utils/posts/create-post";
-import { PostInputDto } from "../../../src/posts/attributes/dto/post.input.dto";
+import { PostAttributes } from "../../../src/posts/attributes/dto/post.attributes";
 import { updatePost } from "../../utils/posts/update-post";
 import { getPostById } from "../../utils/posts/get-post-by-id";
 import { generateBasicAuthToken } from "../../utils/generate-admin-auth-token";
@@ -57,7 +57,7 @@ describe('Posts API Tests', () => {
     it(`✅should update existing post by id; PUT /posts/:id`, async () => {
         const createdPost = await createPost(app);
 
-        const updateDataSet: PostInputDto = {
+        const updateDataSet: PostAttributes = {
             title: 'new post',
             shortDescription: 'some description',
             content: 'super content',

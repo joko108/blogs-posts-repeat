@@ -2,9 +2,9 @@ import { PostsForBlogQueryInput } from "../routers/input/post-query.input";
 import { WithId } from "mongodb";
 import { Post } from "../types/post";
 import { postsRepository } from "../repositories/posts.repository";
-import { PostInputDto } from "./dto/post.input.dto";
+import { PostAttributes } from "./dto/post.attributes";
 import { DeleteResult, UpdateResult } from "../../core/types/update.delete.result";
-import { PostForBlogInputDto } from "./dto/post-for-blog.input.dto";
+import { PostForBlogAttributes } from "./dto/post-for-blog.attributes";
 
 export const postsService = {
     async findMany(
@@ -17,7 +17,7 @@ export const postsService = {
         return postsRepository.findById(id);
     },
 
-    async create(dto: PostInputDto, blogName: string): Promise<string> {
+    async create(dto: PostAttributes, blogName: string): Promise<string> {
         // DTO -> domain model; 'blogName and 'cratedAt' adds here.
         const newPost: Post = {
             title: dto.title,
@@ -30,7 +30,7 @@ export const postsService = {
         return await postsRepository.create(newPost);
     },
 
-    async createPostForBlog(dto: PostForBlogInputDto, blogId: string, blogName: string): Promise<string> {
+    async createPostForBlog(dto: PostForBlogAttributes, blogId: string, blogName: string): Promise<string> {
         const newPostForBlog: Post = {
             title: dto.title,
             shortDescription: dto.shortDescription,
@@ -42,7 +42,7 @@ export const postsService = {
         return await postsRepository.create(newPostForBlog);
     },
 
-    async update(id: string, dto: PostInputDto): Promise<UpdateResult> {
+    async update(id: string, dto: PostAttributes): Promise<UpdateResult> {
         const isUpdated = await postsRepository.update(id, dto);
         return isUpdated ? { status: 'updated' } : { status: 'not found' };
     },

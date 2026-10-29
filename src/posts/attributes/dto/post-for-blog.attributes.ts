@@ -1,5 +1,5 @@
 // Data from client for create post for a specific blog.
-export type PostForBlogInputDto = {
+export type PostForBlogAttributes = {
     title: string,
     shortDescription: string,
     content: string,

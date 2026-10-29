@@ -29,7 +29,6 @@ export const blogsRepository = {
             .toArray();
 
         const totalCount = await blogCollection.countDocuments(filter);
-
         return { items, totalCount };
     },
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PostInputDto } from "../../attributes/dto/post.input.dto";
+import { PostAttributes } from "../../attributes/dto/post.attributes";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { mapToPostViewModelUtils } from "../mappers/map-to-post-view-model.utils";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
@@ -7,7 +7,7 @@ import { postsService } from "../../attributes/posts.service";
 import { blogsService } from "../../../blogs/application/blogs.service";
 
 export const createPostHandler = async (
-    req: Request<{}, {}, PostInputDto>,
+    req: Request<{}, {}, PostAttributes>,
     res: Response
 ) => {
     try {

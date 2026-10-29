@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { PostInputDto } from "../../../src/posts/attributes/dto/post.input.dto";
+import { PostAttributes } from "../../../src/posts/attributes/dto/post.attributes";
 import { getPostDto } from "./get-post-dto";
 import request from "supertest";
 import { POSTS_PATH } from "../../../src/posts/constants/posts.paths";
@@ -10,7 +10,7 @@ export const updatePost = async (
     app: Express,
     postId: string,
     blogId: string,
-    postDto?: PostInputDto
+    postDto?: PostAttributes
 ): Promise<void> => {
 
     const defaultPost = getPostDto(blogId);
