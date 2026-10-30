@@ -1,4 +1,5 @@
 export enum UserSortField {
-    Asc = 'asc',
-    Desc = 'desc',
+    CreatedAt = 'createdAt',
+    Login = 'login',
+    Email = 'email',
 }

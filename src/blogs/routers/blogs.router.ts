@@ -14,7 +14,7 @@ import { inputValidationResultMiddleware } from "../../core/middlewares/validati
 import { superAdminGuardMiddleware } from "../../auth/middlewares/super-admin.guard.middleware";
 import {
     paginationSortingValidationMiddleware
-} from "../../core/middlewares/validation/query-pagenation-sorting.validation.middleware";
+} from "../../core/middlewares/validation/query-pagination-sorting.validation.middleware";
 import { BlogSortField } from "./input/blog-sort-field";
 import { sanitizeQueryParamsMiddleware } from "../../core/middlewares/validation/sanitize-query.middleware";
 import { PostSortField } from "../../posts/routers/input/post-sort-field";

@@ -16,7 +16,7 @@ const passwordValidation = body('password')
     .isString()
     .withMessage('Password must be a string')
     .trim()
-    .isLength({ min: 6, max: 120 })
+    .isLength({ min: 6, max: 20 })
     .withMessage('Invalid length of login');
 
 const emailValidation = body('email')

@@ -3,7 +3,7 @@ import { USERS_ROUTES } from "../constants/user.paths";
 import { superAdminGuardMiddleware } from "../../auth/middlewares/super-admin.guard.middleware";
 import {
     paginationSortingValidationMiddleware
-} from "../../core/middlewares/validation/query-pagenation-sorting.validation.middleware";
+} from "../../core/middlewares/validation/query-pagination-sorting.validation.middleware";
 import { UserSortField } from "./input/user-sort-field";
 import { inputValidationResultMiddleware } from "../../core/middlewares/validation/input-validation-result.middleware";
 import { sanitizeQueryParamsMiddleware } from "../../core/middlewares/validation/sanitize-query.middleware";

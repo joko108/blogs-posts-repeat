@@ -11,7 +11,7 @@ import { deletePostHandler } from "./handlers/delete-post.handler";
 import { superAdminGuardMiddleware } from "../../auth/middlewares/super-admin.guard.middleware";
 import {
     paginationSortingValidationMiddleware
-} from "../../core/middlewares/validation/query-pagenation-sorting.validation.middleware";
+} from "../../core/middlewares/validation/query-pagination-sorting.validation.middleware";
 import { PostSortField } from "./input/post-sort-field";
 import { sanitizeQueryParamsMiddleware } from "../../core/middlewares/validation/sanitize-query.middleware";
 
