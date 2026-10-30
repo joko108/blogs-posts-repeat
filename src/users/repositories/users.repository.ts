@@ -57,4 +57,12 @@ export const usersRepository = {
         });
         return deleteResult.deletedCount > 0;
     },
+
+    async findByLogin(login: string): Promise<WithId<User> | null> {
+        return await userCollection.findOne({ login });
+    },
+
+    async findByEmail(email: string): Promise<WithId<User> | null> {
+        return await userCollection.findOne({ email });
+    },
 };

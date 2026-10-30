@@ -22,7 +22,24 @@ export const createUserHandler = async (
 
         const userViewModel = mapToUserViewModel(createdUser);
         res.status(HttpStatus.Created_201).send(userViewModel);
-    } catch {
+
+    } catch (error) {
+        // Handle errors of unique.
+        if (error instanceof Error) {
+            if (error.message === 'Login already exists') {
+                res
+                    .status(HttpStatus.BadRequest_400)
+                    .send(createErrorMessage([{ message: 'Login already exists', field: 'login' }]));
+                return;
+            }
+            if (error.message === 'Email already exists') {
+                res
+                    .status(HttpStatus.BadRequest_400)
+                    .send(createErrorMessage([{ message: 'Email already exists', field: 'email' }]));
+                return;
+            }
+        }
+
         res.sendStatus(HttpStatus.InternalServerError_500);
     }
 };

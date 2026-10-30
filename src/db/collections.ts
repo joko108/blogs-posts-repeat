@@ -18,6 +18,10 @@ export const initCollections = (db: Db): void => {
     blogCollection = db.collection<Blog>(BLOG_COLLECTION_NAME);
     postCollection = db.collection<Post>(POST_COLLECTION_NAME);
     userCollection = db.collection<User>(USER_COLLECTION_NAME);
+
+    // For check unique of values.
+    userCollection.createIndex({ login: 1 }, { unique: true });
+    userCollection.createIndex({ email: 1 }, { unique: true });
 };
 
 // Return all collections (for tests).
