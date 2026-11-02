@@ -18,13 +18,13 @@ export const usersService = {
 
     async create(dto: UsersAttributes): Promise<string> {
         // At first search existing login.
-        const existingUserByLogin = await this.findByLogin(dto.login);
+        const existingUserByLogin = await this.findByLoginOrEmail(dto.login);
         if (existingUserByLogin) {
             throw new Error('Login already exists');
         }
 
         // At second search existing email.
-        const existingUserByEmail = await this.findByEmail(dto.email);
+        const existingUserByEmail = await this.findByLoginOrEmail(dto.email);
         if (existingUserByEmail) {
             throw new Error('Email already exists');
         }
@@ -43,11 +43,7 @@ export const usersService = {
         return isDeleted ? { status: 'deleted' } : { status: 'not found' };
     },
 
-    async findByLogin(login: string): Promise<WithId<User> | null> {
-        return usersRepository.findByLogin(login);
-    },
-
-    async findByEmail(email: string): Promise<WithId<User> | null> {
-        return usersRepository.findByEmail(email);
+    async findByLoginOrEmail(loginOrEmail: string): Promise<WithId<User> | null> {
+        return await usersRepository.findByLoginOrEmail(loginOrEmail);
     },
 };

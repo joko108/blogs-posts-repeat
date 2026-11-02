@@ -8,6 +8,8 @@ import { postsRouter } from "./posts/routers/posts.router";
 import { HttpStatus } from "./core/types/http-statuses";
 import { USERS_PATH } from "./users/constants/user.paths";
 import { usersRouter } from "./users/routes/users.router";
+import { AUTH_PATH } from "./auth/constants/auth.path";
+import { authRouter } from "./auth/routers/auth.router";
 
 export const setupApp = (app: Express) => {
     app.use(express.json());
@@ -21,5 +23,7 @@ export const setupApp = (app: Express) => {
     app.use(BLOGS_PATH, blogsRouter);
     app.use(POSTS_PATH, postsRouter);
     app.use(USERS_PATH, usersRouter);
+    app.use(AUTH_PATH, authRouter);
+
     app.use(TESTING_PATH, testingRouter);
 };
