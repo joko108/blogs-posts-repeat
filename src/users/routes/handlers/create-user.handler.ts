@@ -4,6 +4,7 @@ import { usersService } from "../../application/users.service";
 import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
 import { mapToUserViewModel } from "../mappers/map-to-user-view-model";
+import { usersRepository } from "../../repositories/users.repository";
 
 export const createUserHandler = async (
     req: Request<{}, {}, UsersAttributes>,
@@ -12,7 +13,7 @@ export const createUserHandler = async (
     try {
         const createdUserId = await usersService.create(req.body);
 
-        const createdUser = await usersService.findById(createdUserId);
+        const createdUser = await usersRepository.findById(createdUserId);
         if (!createdUser) {
             res
                 .status(HttpStatus.NotFound_404)

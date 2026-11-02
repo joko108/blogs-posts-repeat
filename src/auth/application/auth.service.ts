@@ -1,4 +1,5 @@
 import { usersRepository } from "../../users/repositories/users.repository";
+import { bcryptService } from "../adapters/bcrypt.service";
 
 export const authService = {
     async loginUser(loginOrEmail: string, password: string): Promise<{ accessToken: string } | null> {
@@ -14,6 +15,6 @@ export const authService = {
         const user = await usersRepository.findByLoginOrEmail(loginOrEmail);
         if (!user) return false;
 
-        return user.password === password;
+        return bcryptService.checkPassword(password, user.password);
     },
 };
