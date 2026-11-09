@@ -25,7 +25,7 @@ describe('Posts API body validation check', () => {
         await request(app)
             .post(POSTS_PATH)
             .send({})
-            .expect(HttpStatus.Unathorized_401);
+            .expect(HttpStatus.Unauthorized_401);
 
         const invalidDataSet1 = await request(app)
             .post(POSTS_PATH)

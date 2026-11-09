@@ -11,14 +11,14 @@ export const superAdminGuardMiddleware = (
     const auth = req.headers['authorization'] as string;  // 'Basic xxxxx'
 
     if (!auth) {
-        res.sendStatus(HttpStatus.Unathorized_401);
+        res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
 
     const [authType, token] = auth.split(' ');
 
     if (authType !== 'Basic') {
-        res.sendStatus(HttpStatus.Unathorized_401);
+        res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
 
@@ -27,7 +27,7 @@ export const superAdminGuardMiddleware = (
     const [username, password] = credentials.split(':');
 
     if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
-        res.sendStatus(HttpStatus.Unathorized_401);
+        res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
 

@@ -29,7 +29,7 @@ describe('Blogs body validation tests', () => {
         await request(app)
             .post(BLOGS_PATH)
             .send(correctTestBlogData)
-            .expect(HttpStatus.Unathorized_401);
+            .expect(HttpStatus.Unauthorized_401);
 
         const invalidDataSet1 = await request(app)
             .post(BLOGS_PATH)
