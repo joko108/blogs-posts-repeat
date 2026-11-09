@@ -1,20 +1,33 @@
 import { usersRepository } from "../../users/repositories/users.repository";
 import { bcryptService } from "../adapters/bcrypt.service";
+import { jwtService } from "../adapters/jwt.service";
+import { WithId } from "mongodb";
+import { User } from "../../users/types/user";
 
 export const authService = {
-    async loginUser(loginOrEmail: string, password: string): Promise<{ accessToken: string } | null> {
-        const isCorrectCredentials = await this.checkUserCredentials(loginOrEmail, password);
-        if (!isCorrectCredentials) {
+    async loginUser(
+        loginOrEmail: string,
+        password: string
+    ): Promise<{ accessToken: string } | null> {
+        const user = await this.checkUserCredentials(loginOrEmail, password);
+        if (!user) {
             return null;
         }
 
-        return { accessToken: 'token' };
+        const accessToken = await jwtService.createToken(user._id.toString());
+        return { accessToken: accessToken };
     },
 
-    async checkUserCredentials(loginOrEmail: string, password: string): Promise<boolean> {
+    async checkUserCredentials(
+        loginOrEmail: string,
+        password: string
+    ): Promise<WithId<User> | null> {
         const user = await usersRepository.findByLoginOrEmail(loginOrEmail);
-        if (!user) return false;
+        if (!user) return null;
 
-        return bcryptService.checkPassword(password, user.password);
+        const isPassCorrect = bcryptService.checkPassword(password, user.password);
+        if (!isPassCorrect) return null;
+
+        return user;
     },
 };

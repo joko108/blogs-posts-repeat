@@ -3,7 +3,9 @@ import { AUTH_ROUTES } from "../constants/auth.path";
 import { passwordValidation } from "../validation/password-input-dto.validation";
 import { loginOrEmailValidation } from "../validation/login-or-email-input-dto.validation";
 import { inputValidationResultMiddleware } from "../../core/middlewares/validation/input-validation-result.middleware";
-import { authHandler } from "./handlers/auth.handler";
+import { authPostHandler } from "./handlers/auth-post.handler";
+import { accessTokenGuard } from "../guards/access-token.guard";
+import {authGetHandler} from "./handlers/auth-get.handler";
 
 export const authRouter = Router({});
 
@@ -12,5 +14,11 @@ authRouter.post(
     passwordValidation,
     loginOrEmailValidation,
     inputValidationResultMiddleware,
-    authHandler
+    authPostHandler
+);
+
+authRouter.get(
+    AUTH_ROUTES.ME,
+    accessTokenGuard,
+    authGetHandler,
 );
