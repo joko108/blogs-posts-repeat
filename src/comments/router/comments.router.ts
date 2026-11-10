@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { COMMENTS_ROUTES } from "../constants/comments.paths";
 import {
-    commentIdParamValidation, paramIdValidation,
+    commentIdParamValidation,
 } from "../../core/middlewares/validation/param-id.validation";
 import { contentValidation } from "../validation/commentInputDtoValidation";
 import { inputValidationResultMiddleware } from "../../core/middlewares/validation/input-validation-result.middleware";
