@@ -9,8 +9,8 @@ export const authPostHandler = async (
 ) => {
     const { loginOrEmail, password } = req.body;
 
-    const accessToken = await authService.loginUser(loginOrEmail, password);
-    if (!accessToken) return res.sendStatus(HttpStatus.Unauthorized_401);
+    const result = await authService.loginUser(loginOrEmail, password);
+    if (!result) return res.sendStatus(HttpStatus.Unauthorized_401);
 
-    return res.sendStatus(HttpStatus.NoContent_204);
+    return res.status(HttpStatus.Ok_200).send({ accessToken: result.accessToken });
 };

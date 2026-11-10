@@ -5,10 +5,10 @@ import { createErrorMessage } from "../../../core/middlewares/validation/input-v
 import { mapToCommentViewModelUtils } from "../mappers/map-to-comment-view-model.utils";
 
 export const getCommentHandler = async (
-    req: Request<{ id: string }>, res: Response
+    req: Request<{ commentId: string }>, res: Response
 ) => {
     try {
-        const comment = await commentsQueryRepository.findById(req.params.id);
+        const comment = await commentsQueryRepository.findById(req.params.commentId);
         if (!comment) {
             res
                 .status(HttpStatus.NotFound_404)

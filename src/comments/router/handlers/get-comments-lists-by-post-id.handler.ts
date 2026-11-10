@@ -7,11 +7,11 @@ import { commentsQueryRepository } from "../../repositories/comments.query.repos
 import { mapToCommentsListViewModelUtils } from "../mappers/map-to-comments-list-view-model.utils";
 
 export const getCommentsListsByPostIdHandler = async (
-    req: Request<{ id: string }, {}, {}, CommentsQueryInput>,
+    req: Request<{ postId: string }, {}, {}, CommentsQueryInput>,
     res: Response,
 ) => {
     try {
-        const postId = req.params.id;
+        const postId = req.params.postId;
         const queryInput = req.query;
 
         const post = await postsService.findById(postId);

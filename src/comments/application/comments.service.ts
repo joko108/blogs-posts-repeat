@@ -4,8 +4,9 @@ import { commentsRepository } from "../repositories/comments.repository";
 import { DeleteResult, UpdateResult } from "../../core/types/update.delete.result";
 
 export const commentsService = {
-    async create(dto: CommentAttributes, userId: string, userLogin: string): Promise<string> {
+    async create(dto: CommentAttributes, postId: string, userId: string, userLogin: string): Promise<string> {
         const newComment: Comment = {
+            postId,
             content: dto.content,
             userId: userId,
             userLogin: userLogin,

@@ -31,8 +31,14 @@ export const createCommentForPostHandler = async (
             return;
         }
 
-        // Pass dto, userId and userLogin to the service.
-        const createCommentId = await commentsService.create(req.body, user._id.toString(), user.login);
+        // Pass dto, userId, postId and userLogin to the service.
+        const createCommentId = await commentsService.create(
+            req.body,
+            req.params.postId,
+            user._id.toString(),
+            user.login
+        );
+
         const createComment = await commentsQueryRepository.findById(createCommentId);
         if (!createComment) {
             res
@@ -42,7 +48,7 @@ export const createCommentForPostHandler = async (
         }
 
         const commentViewModel = mapToCommentViewModelUtils(createComment);
-        res.status(HttpStatus.Ok_200).send(commentViewModel);
+        res.status(HttpStatus.Created_201).send(commentViewModel);
 
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);

@@ -21,7 +21,7 @@ export const commentsQueryRepository = {
             .limit(pageSize)
             .toArray();
 
-        const totalCount = await commentsCollection.countDocuments();
+        const totalCount = await commentsCollection.countDocuments(filter);
 
         return { items, totalCount };
     },

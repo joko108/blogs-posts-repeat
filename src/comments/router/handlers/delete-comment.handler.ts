@@ -4,9 +4,9 @@ import { HttpStatus } from "../../../core/types/http-statuses";
 import { createErrorMessage } from "../../../core/middlewares/validation/input-validation-result.middleware";
 import { commentsService } from "../../application/comments.service";
 
-export const deleteCommentHandler = async (req: Request<{ id: string }>, res: Response) => {
+export const deleteCommentHandler = async (req: Request<{ commentId: string }>, res: Response) => {
     try {
-        const comment = await commentsQueryRepository.findById(req.params.id);
+        const comment = await commentsQueryRepository.findById(req.params.commentId);
         if (!comment) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -14,7 +14,12 @@ export const deleteCommentHandler = async (req: Request<{ id: string }>, res: Re
             return;
         }
 
-        await commentsService.delete(req.params.id);
+        if (comment.userId !== req.user!.id) {
+            res.sendStatus(HttpStatus.Forbidden_403);
+            return;
+        }
+
+        await commentsService.delete(req.params.commentId);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);

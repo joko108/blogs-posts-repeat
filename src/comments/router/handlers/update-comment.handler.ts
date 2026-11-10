@@ -6,12 +6,12 @@ import { createErrorMessage } from "../../../core/middlewares/validation/input-v
 import { commentsService } from "../../application/comments.service";
 
 export const updateCommentHandler = async (
-    req: Request<{ id: string }, {}, CommentAttributes>,
+    req: Request<{ commentId: string }, {}, CommentAttributes>,
     res: Response,
 ) => {
     try {
         // Check whether the comment exists.
-        const comment = await commentsQueryRepository.findById(req.params.id);
+        const comment = await commentsQueryRepository.findById(req.params.commentId);
         if (!comment) {
             res
                 .status(HttpStatus.NotFound_404)
@@ -19,7 +19,12 @@ export const updateCommentHandler = async (
             return;
         }
 
-        await commentsService.update(req.params.id, req.body);
+        if (comment.userId !== req.user!.id) {
+            res.sendStatus(HttpStatus.Forbidden_403);
+            return;
+        }
+
+        await commentsService.update(req.params.commentId, req.body);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch {
         res.sendStatus(HttpStatus.InternalServerError_500);

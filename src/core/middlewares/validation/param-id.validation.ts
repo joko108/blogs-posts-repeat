@@ -23,3 +23,11 @@ export const postIdParamValidation = param('postId')
     .withMessage('ID must be a string')
     .isMongoId()
     .withMessage('Must be a Mongo ID format');
+
+export const commentIdParamValidation = param('commentId')
+    .exists()
+    .withMessage('ID is required')
+    .isString()
+    .withMessage('ID must be a string')
+    .isMongoId()
+    .withMessage('Must be a Mongo ID format');

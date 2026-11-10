@@ -1,0 +1,208 @@
+.
+├── README.md
+├── __tests__
+│   ├── e2e
+│   │   ├── blogs
+│   │   │   ├── blogs-body-validation.e2e.spec.ts
+│   │   │   └── blogs.e2e.spec.ts
+│   │   └── posts
+│   │       ├── posts-body-validation.e2e.spec.ts
+│   │       └── posts.e2e.spec.ts
+│   └── utils
+│       ├── blogs
+│       │   ├── create-blog.ts
+│       │   ├── get-blog-by-id.ts
+│       │   ├── get-blog-dto.ts
+│       │   └── update-blog.ts
+│       ├── clear-db.ts
+│       ├── generate-admin-auth-token.ts
+│       └── posts
+│           ├── create-post.ts
+│           ├── get-post-by-id.ts
+│           ├── get-post-dto.ts
+│           └── update-post.ts
+├── jest.config.json
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── project_tree.txt
+├── src
+│   ├── auth
+│   │   ├── adapters
+│   │   │   ├── bcrypt.service.ts
+│   │   │   └── jwt.service.ts
+│   │   ├── application
+│   │   │   ├── auth.service.ts
+│   │   │   └── dto
+│   │   │       └── auth-attributes.ts
+│   │   ├── constants
+│   │   │   └── auth.path.ts
+│   │   ├── guards
+│   │   │   └── access-token.guard.ts
+│   │   ├── middlewares
+│   │   │   └── super-admin.guard.middleware.ts
+│   │   ├── routers
+│   │   │   ├── auth.router.ts
+│   │   │   ├── handlers
+│   │   │   │   ├── auth-get.handler.ts
+│   │   │   │   └── auth-post.handler.ts
+│   │   │   └── mappers
+│   │   │       └── map-to-me-view-model.utils.ts
+│   │   ├── types
+│   │   │   ├── login.dto.ts
+│   │   │   └── me-view-model.ts
+│   │   └── validation
+│   │       ├── login-or-email-input-dto.validation.ts
+│   │       └── password-input-dto.validation.ts
+│   ├── blogs
+│   │   ├── application
+│   │   │   ├── blogs.service.ts
+│   │   │   └── dtos
+│   │   │       └── blogs-attributes.ts
+│   │   ├── constants
+│   │   │   └── blogs.paths.ts
+│   │   ├── repositories
+│   │   │   └── blogs.repository.ts
+│   │   ├── routers
+│   │   │   ├── blogs.router.ts
+│   │   │   ├── handlers
+│   │   │   │   ├── create-blog.handler.ts
+│   │   │   │   ├── delete-blog.handler.ts
+│   │   │   │   ├── get-blog.handler.ts
+│   │   │   │   ├── get-blogs-list.handler.ts
+│   │   │   │   ├── get-posts-by-blog-id.handler.ts
+│   │   │   │   └── update-blog.handler.ts
+│   │   │   ├── input
+│   │   │   │   ├── blog-query.input.ts
+│   │   │   │   └── blog-sort-field.ts
+│   │   │   └── mappers
+│   │   │       ├── map-to-blog-view-model.utils.ts
+│   │   │       └── map-to-blogs-list-view-model.utils.ts
+│   │   ├── types
+│   │   │   ├── blog-view-model.ts
+│   │   │   ├── blog.ts
+│   │   │   └── blogs-list-view-model.ts
+│   │   └── validation
+│   │       └── blog-input-dto.validation.ts
+│   ├── comments
+│   │   ├── application
+│   │   │   ├── comments.service.ts
+│   │   │   └── dto
+│   │   │       └── comment.attributes.ts
+│   │   ├── constants
+│   │   │   └── comments.paths.ts
+│   │   ├── repositories
+│   │   │   ├── comments.query.repository.ts
+│   │   │   └── comments.repository.ts
+│   │   ├── router
+│   │   │   ├── comments.router.ts
+│   │   │   ├── handlers
+│   │   │   │   ├── create-comment-for-post.handler.ts
+│   │   │   │   ├── delete-comment.handler.ts
+│   │   │   │   ├── get-comment.handler.ts
+│   │   │   │   ├── get-comments-lists-by-post-id.handler.ts
+│   │   │   │   └── update-comment.handler.ts
+│   │   │   ├── input
+│   │   │   │   ├── comments-query.input.ts
+│   │   │   │   └── comments-sort-field.ts
+│   │   │   └── mappers
+│   │   │       ├── map-to-comment-view-model.utils.ts
+│   │   │       └── map-to-comments-list-view-model.utils.ts
+│   │   ├── types
+│   │   │   ├── comment-view-model.ts
+│   │   │   ├── comment.ts
+│   │   │   └── comments-list-view-model.ts
+│   │   └── validation
+│   │       └── commentInputDtoValidation.ts
+│   ├── core
+│   │   ├── middlewares
+│   │   │   └── validation
+│   │   │       ├── input-validation-result.middleware.ts
+│   │   │       ├── param-id.validation.ts
+│   │   │       ├── query-pagination-sorting.validation.middleware.ts
+│   │   │       └── sanitize-query.middleware.ts
+│   │   └── types
+│   │       ├── http-statuses.ts
+│   │       ├── id.ts
+│   │       ├── index.d.ts
+│   │       ├── paginated.output.ts
+│   │       ├── pagination-and-sorting.ts
+│   │       ├── sort-direction.ts
+│   │       ├── update.delete.result.ts
+│   │       └── validation-error.ts
+│   ├── db
+│   │   ├── collections.ts
+│   │   └── mongo.db.ts
+│   ├── index.ts
+│   ├── posts
+│   │   ├── attributes
+│   │   │   ├── dto
+│   │   │   │   ├── post-for-blog.attributes.ts
+│   │   │   │   └── post.attributes.ts
+│   │   │   └── posts.service.ts
+│   │   ├── constants
+│   │   │   └── posts.paths.ts
+│   │   ├── repositories
+│   │   │   └── posts.repository.ts
+│   │   ├── routers
+│   │   │   ├── handlers
+│   │   │   │   ├── create-post-for-blog.handler.ts
+│   │   │   │   ├── create-post.handler.ts
+│   │   │   │   ├── delete-post.handler.ts
+│   │   │   │   ├── get-post.hendler.ts
+│   │   │   │   ├── get-posts-list.handler.ts
+│   │   │   │   └── update-post.handler.ts
+│   │   │   ├── input
+│   │   │   │   ├── post-query.input.ts
+│   │   │   │   └── post-sort-field.ts
+│   │   │   ├── mappers
+│   │   │   │   ├── map-to-post-view-model.utils.ts
+│   │   │   │   └── map-to-posts-list-view-model.utils.ts
+│   │   │   └── posts.router.ts
+│   │   ├── types
+│   │   │   ├── post-view-model.ts
+│   │   │   ├── post.ts
+│   │   │   └── posts-list-view-model.ts
+│   │   └── validation
+│   │       └── post-input-dto.validation-middleware.ts
+│   ├── settings
+│   │   └── config.ts
+│   ├── setup-app.ts
+│   ├── testing
+│   │   ├── constants
+│   │   │   └── testing.paths.ts
+│   │   └── router
+│   │       ├── handlers
+│   │       │   └── truncate-db.handler.ts
+│   │       └── testing.router.ts
+│   └── users
+│       ├── application
+│       │   ├── dtos
+│       │   │   └── users-attributes.ts
+│       │   └── users.service.ts
+│       ├── constants
+│       │   └── user.paths.ts
+│       ├── repositories
+│       │   ├── users.query.repository.ts
+│       │   └── users.repository.ts
+│       ├── routes
+│       │   ├── handlers
+│       │   │   ├── create-user.handler.ts
+│       │   │   ├── delete-user.handler.ts
+│       │   │   └── get-users-list.handler.ts
+│       │   ├── input
+│       │   │   ├── user-query.input.ts
+│       │   │   └── user-sort-field.ts
+│       │   ├── mappers
+│       │   │   ├── map-to-user-view-model.ts
+│       │   │   └── map-to-users-list-view-model.utils.ts
+│       │   └── users.router.ts
+│       ├── types
+│       │   ├── user-view-model.ts
+│       │   ├── user.ts
+│       │   └── users-list-view-model.ts
+│       └── validation
+│           └── user-input-dto.validation.ts
+└── tsconfig.json
+
+75 directories, 131 files

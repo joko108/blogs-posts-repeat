@@ -25,7 +25,7 @@ export const authService = {
         const user = await usersRepository.findByLoginOrEmail(loginOrEmail);
         if (!user) return null;
 
-        const isPassCorrect = bcryptService.checkPassword(password, user.password);
+        const isPassCorrect = await bcryptService.checkPassword(password, user.password);
         if (!isPassCorrect) return null;
 
         return user;
